@@ -1,0 +1,2 @@
+"spec","estimate","se_conv","ci_rb_low","ci_rb_high","p_rb","bw_h","n_left","n_right"
+"Medicare coverage (first stage)",0.638560938622093,0.0330790515763286,0.552035619793602,0.696776954492363,3.77413544836077e-64,10.0714402191793,1378,1463

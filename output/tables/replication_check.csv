@@ -1,0 +1,7 @@
+"table","model","paper_est","paper_se","paper_n","rep_est","rep_se","rep_n","matches"
+"Table 1","Discharges, no controls",-0.338,0.141,516,-0.338128165407547,0.141296823898608,516,TRUE
+"Table 1","Discharges, controls",-0.384,0.14,508,-0.384111971255329,0.139830824796605,508,TRUE
+"Table 2","Home care days, no controls",-3.746,6.322,561,-3.74564953128285,6.32204778488142,561,TRUE
+"Table 2","Home care days, controls",-3.144,6.411,561,-3.14387815011814,6.41102304916608,561,TRUE
+"Table 3","Placebo discharges",0.276,0.164,437,0.27644017002793,0.164373361225052,437,TRUE
+"Table 3","Placebo home care days",-4.352,11.031,373,-4.35155180059014,11.030923103317,373,TRUE
