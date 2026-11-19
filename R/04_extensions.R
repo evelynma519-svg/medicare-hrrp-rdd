@@ -40,6 +40,8 @@ rd <- function(df, y, label, covs = FALSE, weights = NULL, h = NULL) {
 }
 
 post      <- d %>% filter(post == 1)
+DONUT_MONTHS <- 12
+donut <- function(df) df %>% filter(!(age_c >= 0 & age_c < DONUT_MONTHS))
 post_hosp <- post %>% filter(samp_orig_discharges)
 
 # ---- E1, E2, E4, E6: RD estimates for the post-HRRP period ------------------
@@ -50,10 +52,16 @@ rd_rows <- list(
   rd(post,      "discharges", "Discharges, incl. zeros, with covariates", covs = TRUE),
   rd(post,      "any_hosp",   "Any hospitalization (extensive margin)"),
   rd(post,      "any_hosp",   "Any hospitalization, with covariates", covs = TRUE),
-  rd(post %>% filter(!(age_c >= 0 & age_c < 12)), "discharges",
-     "Donut: discharges incl. zeros, drop first 12 months after 65"),
-  rd(post_hosp %>% filter(!(age_c >= 0 & age_c < 12)), "discharges",
-     "Donut: discharges | hospitalized, drop first 12 months after 65"),
+  # Donut RD: the hole (0-11 months after 65) is wider than a data-driven
+  # bandwidth can be, so the bandwidth is fixed at 24 and 36 months.
+  rd(donut(post), "discharges",
+     "Donut (h = 24): discharges incl. zeros", h = 24),
+  rd(donut(post), "discharges",
+     "Donut (h = 36): discharges incl. zeros", h = 36),
+  rd(donut(post_hosp), "discharges",
+     "Donut (h = 24): discharges | hospitalized", h = 24),
+  rd(donut(post_hosp), "discharges",
+     "Donut (h = 36): discharges | hospitalized", h = 36),
   rd(post,      "hh_days",    "Home care days, all respondents"))
 if (has_wt) {
   rd_rows <- c(rd_rows, list(
